@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tasktraverser-ingress
+  namespace: tasktraverser
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: tasktraverser.local
+      http:
+        paths:
+          - path: /TodoTraverse
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 5000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
